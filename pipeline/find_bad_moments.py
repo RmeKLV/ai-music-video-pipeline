@@ -65,8 +65,6 @@ def merge(times, scores, gap=0.5):
     return sorted(picked)
 
 
-mix_mono, mix, msr = None, None, None
-v, i_ = None, None
 vs, vsr = sf.read(sorted(glob.glob(os.path.join(take, "vocals.*")))[0], always_2d=True)
 ins, _ = sf.read(sorted(glob.glob(os.path.join(take, "instrumental.*")))[0], always_2d=True)
 n = min(len(vs), len(ins)); mix = vs[:n] + ins[:n]; msr = vsr

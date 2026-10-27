@@ -8,16 +8,17 @@ Run with the tools venv and ComfyUI STOPPED (one heavy job at a time).
 usage: finish_song.py <take folder with mix.wav|mix.flac> <reference.wav>"""
 import glob, os, shutil, subprocess, sys
 from audio_separator.separator import Separator
+import paths
 
 PY = sys.executable
-S = r"D:\Editing\Youtube\AI\song01_paper_planes\scripts"
+S = paths.SCRIPTS
 P = os.path.dirname(os.path.abspath(__file__))
-MODELS_DIR = r"D:\Editing\Youtube\AI\tools\models"
+MODELS_DIR = paths.need(paths.MODELS, "separation models folder", "AI_MODELS")
 VOCAL_MODELS = {"unwa": "mel_band_roformer_kim_ft_unwa.ckpt", "bsrof": "model_bs_roformer_ep_317_sdr_12.9755.ckpt",
                 "demucs": "htdemucs_ft.yaml"}
 
 take, ref = sys.argv[1], sys.argv[2]
-mix = next(os.path.join(take, f) for f in ("mix.wav", "mix.flac") if os.path.exists(os.path.join(take, f)))
+mix = paths.find_mix(take)
 stems = os.path.join(take, "stems_v3"); fin = os.path.join(take, "final"); os.makedirs(stems, exist_ok=True); os.makedirs(fin, exist_ok=True)
 run = lambda *a: print(subprocess.run([PY, *a], check=True, capture_output=True, text=True).stdout.strip().splitlines()[-1], flush=True)
 

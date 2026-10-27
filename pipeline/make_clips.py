@@ -4,23 +4,23 @@ Keeps listening sessions short for the user. env CLIP_START=<seconds> uses one f
 import os, subprocess, sys, tempfile
 import numpy as np
 import soundfile as sf
+from paths import MASTER as master, find_mix
 
 CLIP = 25.0
 START = float(os.environ['CLIP_START']) if os.environ.get('CLIP_START') else None  # same window for every clip
 ref, out = sys.argv[1], sys.argv[2]
 os.makedirs(out, exist_ok=True)
-master = r"D:\Editing\Youtube\AI\song01_paper_planes\scripts\master_ref.py"
 tmp = tempfile.mkdtemp(prefix="clips_")
 clips = []
 for arg in sys.argv[3:]:
     label, mix = arg.split("=", 1)
     if os.path.isdir(mix):  # a take folder: the generation tail saves mix.wav or mix.flac
-        mix = next(os.path.join(mix, f) for f in ("mix.wav", "mix.flac") if os.path.exists(os.path.join(mix, f)))
+        mix = find_mix(mix)
     mpath = os.path.join(tmp, label + ".wav")
     subprocess.run([sys.executable, master, mix, ref, mpath], check=True, capture_output=True)
     x, sr = sf.read(mpath, always_2d=True)
     win, hop = int(CLIP * sr), sr // 2
-    e = np.array([np.mean(x[i:i + win] ** 2) for i in range(0, len(x) - win, hop)])
+    e = np.array([np.mean(x[i:i + win] ** 2) for i in range(0, max(1, len(x) - win + 1), hop)])
     s = int(START * sr) if START is not None else int(np.argmax(e)) * hop
     c = x[s:s + win].copy()
     fade = int(0.5 * sr); ramp = np.linspace(0, 1, fade)[:, None]

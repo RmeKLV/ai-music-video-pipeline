@@ -1,0 +1,11 @@
+# Core: every script in pipeline/ and to_video.py
+numpy
+scipy
+soundfile
+librosa>=0.10
+matplotlib
+# Per step (install what you use)
+audio-separator     # finish_song.py: MelBand RoFormer / BS-RoFormer / Demucs separation
+pedalboard          # produce.py, premium.py: effect chains + your VST3 plugins
+audiobox_aesthetics # rank_takes.py
+torch               # rank_takes.py, vocal_fix.py repair (comfyui/nodes/hybrid_hf_blend.py)

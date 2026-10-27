@@ -10,8 +10,9 @@ import numpy as np
 import soundfile as sf
 import pedalboard as pb
 from scipy.signal import correlate
+from paths import VST3
 
-V = r"C:\Program Files\Common Files\VST3"
+V = VST3
 
 
 def vst(path, **params):
