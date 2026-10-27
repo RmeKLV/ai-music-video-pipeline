@@ -26,3 +26,7 @@ model weights or third-party tools. Only the code and playbooks are here.
 - Video: Node.js, then `npm install` in `song03_porch_light/video/`
 
 Scripts expect song folders (`songNN_name/` with audio and lyrics) that you provide yourself.
+
+## License
+
+MIT, see `LICENSE`. Third-party models and samples keep their own licenses (`licenses/LICENSES.md`).

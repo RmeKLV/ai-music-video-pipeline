@@ -33,3 +33,4 @@ assets/
 
 # ComfyUI custom nodes and music workflows (merged from comfyui-audio-nodes / comfyui-workflows)
 !comfyui/**
+!/LICENSE
