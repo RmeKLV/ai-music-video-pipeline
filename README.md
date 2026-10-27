@@ -19,7 +19,7 @@ model weights or third-party tools. Only the code and playbooks are here.
 | `comfyui/workflows/` | the music workflows: YuE2 song, YuE2 cover, SUNO voice upscale, SUNO instrument batch (moved from `comfyui-workflows`) |
 | `licenses/LICENSES.md` | licenses of the models and samples the pipeline relies on |
 
-## Requirements (not included)
+## Requirements
 
 - Generation: ComfyUI with ACE-Step 1.5, or YuE2. Install the custom nodes from `comfyui/nodes/` (see its README)
 - Separation models (MelBand RoFormer, BS-RoFormer, htdemucs_ft, MDX23C DrumSep), AudioSR, SongEval
