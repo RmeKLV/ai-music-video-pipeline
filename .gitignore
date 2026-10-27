@@ -1,0 +1,32 @@
+# Allow-list: everything is ignored unless listed below.
+# Songs (lyrics, styles, audio), renders, analysis outputs, drum test clips,
+# model weights and third-party tool clones stay local.
+*
+!*/
+tools/ACE-Step-1.5/
+tools/SongEval/
+tools/smule_rs/
+tools/models/
+node_modules/
+references/
+assets/
+
+!/.gitignore
+!/README.md
+!AUDIO_PLAYBOOK.md
+!SONGWRITING_PLAYBOOK.md
+!licenses/LICENSES.md
+
+!pipeline/*.py
+!song01_paper_planes/scripts/*.py
+!song01_paper_planes/scripts/*.sh
+
+!song03_porch_light/video/REUSE_GUIDE.md
+!song03_porch_light/video/package.json
+!song03_porch_light/video/package-lock.json
+!song03_porch_light/video/tools/*.mjs
+!song03_porch_light/video/porch-light/index.html
+!song03_porch_light/video/porch-light/film.js
+!song03_porch_light/video/porch-light/lib/*.js
+!song03_porch_light/video/porch-light/sets/*.js
+!song03_porch_light/video/porch-light/docs/gapfix.py
