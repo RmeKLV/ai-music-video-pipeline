@@ -8,6 +8,7 @@ DEFAULT (commercial-safe): rank by lyric accuracy (Whisper/MIT; YuE2 authors' st
 Audiobox CE+PQ (CC BY 4.0). SongEval is CC BY-NC-SA 4.0 (non-commercial): only with --research."""
 import glob, json, os, re, shutil, subprocess, sys, tempfile
 import soundfile as sf, torch
+import paths
 
 RESEARCH = "--research" in sys.argv
 args = [a for a in sys.argv[1:] if a != "--research"]
@@ -17,13 +18,13 @@ takes = sorted(d for d in glob.glob(pattern) if os.path.isdir(d))
 tmp = tempfile.mkdtemp(prefix="rank_")
 safe = lambda d: os.path.basename(d).replace(".", "p")  # SongEval cuts file ids at the first dot (cfg2.5)
 for d in takes:
-    src = next(os.path.join(d, f) for f in ("mix.wav", "mix.flac") if os.path.exists(os.path.join(d, f)))
+    src = paths.find_mix(d)
     x, sr = sf.read(src, always_2d=True)
     sf.write(os.path.join(tmp, safe(d) + ".wav"), x, sr, subtype="PCM_16")
 
 se = {}
 if RESEARCH:  # SongEval is CC BY-NC-SA 4.0: research comparisons only
-    se_dir = r"D:\Editing\Youtube\AI\tools\SongEval"
+    se_dir = paths.need(paths.SONGEVAL, "SongEval", "AI_SONGEVAL")
     subprocess.run([sys.executable, "eval.py", "-i", tmp, "-o", os.path.join(tmp, "se")], cwd=se_dir,
                    check=True, capture_output=True)
     se = json.load(open(os.path.join(tmp, "se", "result.json")))

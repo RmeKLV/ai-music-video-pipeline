@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <title>Porch Light</title>
 <style>
-  /* Two faces only: one display, one UI. Point these at the brand's files in fonts/. */
-  @font-face { font-family: Display; src: url(fonts/cormorant-garamond-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-style: normal; }
-  @font-face { font-family: Display; src: url(fonts/cormorant-garamond-latin-400-italic.woff2) format('woff2'); font-weight: 400; font-style: italic; }
-  @font-face { font-family: Display; src: url(fonts/cormorant-garamond-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-style: normal; }
-  @font-face { font-family: Display; src: url(fonts/cormorant-garamond-latin-500-italic.woff2) format('woff2'); font-weight: 500; font-style: italic; }
-  @font-face { font-family: Display; src: url(fonts/cormorant-garamond-latin-600-normal.woff2) format('woff2'); font-weight: 600; font-style: normal; }
-  @font-face { font-family: Display; src: url(fonts/cormorant-garamond-latin-600-italic.woff2) format('woff2'); font-weight: 600; font-style: italic; }
-  @font-face { font-family: UI; src: url(fonts/eb-garamond-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-style: normal; }
-  @font-face { font-family: UI; src: url(fonts/eb-garamond-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-style: normal; }
-  @font-face { font-family: UI; src: url(fonts/eb-garamond-latin-400-italic.woff2) format('woff2'); font-weight: 400; font-style: italic; }
-  @font-face { font-family: Thumb; src: url(fonts/thumb.otf) format('opentype'); font-weight: 900; }
+  /* Two faces only: one display, one UI (+ Montserrat Black for thumbnails). Served from node_modules (npm install). */
+  @font-face { font-family: Display; src: url(/node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-style: normal; }
+  @font-face { font-family: Display; src: url(/node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-italic.woff2) format('woff2'); font-weight: 400; font-style: italic; }
+  @font-face { font-family: Display; src: url(/node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-style: normal; }
+  @font-face { font-family: Display; src: url(/node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2) format('woff2'); font-weight: 500; font-style: italic; }
+  @font-face { font-family: Display; src: url(/node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2) format('woff2'); font-weight: 600; font-style: normal; }
+  @font-face { font-family: Display; src: url(/node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2) format('woff2'); font-weight: 600; font-style: italic; }
+  @font-face { font-family: UI; src: url(/node_modules/@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-style: normal; }
+  @font-face { font-family: UI; src: url(/node_modules/@fontsource/eb-garamond/files/eb-garamond-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-style: normal; }
+  @font-face { font-family: UI; src: url(/node_modules/@fontsource/eb-garamond/files/eb-garamond-latin-400-italic.woff2) format('woff2'); font-weight: 400; font-style: italic; }
+  @font-face { font-family: Thumb; src: url(/node_modules/@fontsource/montserrat/files/montserrat-latin-900-normal.woff2) format('woff2'); font-weight: 900; }
   html, body { margin: 0; height: 100%; background: #111; overflow: hidden; }
   body { display: grid; place-items: center; }
   canvas { display: block; max-width: 100vw; max-height: 100vh; width: auto; height: auto; }

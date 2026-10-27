@@ -7,11 +7,13 @@
           of hi-hat moments), ratio 3:1, 1 ms / 50 ms — tames hi-hat spikes, leaves the rest alone
   space : one shared short room on the whole mix (~0.3 s, high-passed 300 Hz, -24 dB send) = 'recorded in one room'
 usage: premium.py in.wav out.wav moves   (moves = comma list, e.g. width,tape,low,space)"""
-import sys
+import os, sys
 import numpy as np
 import soundfile as sf
 import pedalboard as pb
 from scipy.signal import butter, sosfiltfilt
+from paths import VST3
+NOVA = os.path.join(VST3, "TDR Nova.vst3")
 
 src, dst, moves = sys.argv[1], sys.argv[2], set(sys.argv[3].split(","))
 x, sr = sf.read(src, always_2d=True)
@@ -43,7 +45,7 @@ if "tape" in moves:
     x = 0.65 * x + 0.35 * w
 
 if "hats" in moves:
-    nova = pb.load_plugin(r"C:\Program Files\Common Files\VST3\TDR Nova.vst3")
+    nova = pb.load_plugin(NOVA)
     for k, v in dict(band_1_active=True, band_1_type="Bell", band_1_frequency_hz=8500.0, band_1_q=0.8,
                      band_1_gain_db=0.0, band_1_dyn="On", band_1_threshold_db=-14.0, band_1_ratio=3.0,
                      band_1_attack_ms=1.0, band_1_release_ms=50.0, eq_auto_gain=False).items():
@@ -60,12 +62,11 @@ if "hats_drums" in moves:
     # Drums-only hi-hat tamer (user: the whole-mix tamer also tames vocals/guitars). Nova runs on the separated
     # drum stem; only the DIFFERENCE it makes (pure reduction) is added to the mix, so nothing else is touched and
     # the stem's separation noise is never amplified. env PREMIUM_DRUMS=<drum stem path>.
-    import os
     from scipy.signal import correlate
     dr, dsr = sf.read(os.environ["PREMIUM_DRUMS"], always_2d=True)
     assert dsr == sr, "drum stem sample rate differs"
     n = min(len(x), len(dr)); dr = dr[:n]
-    nova = pb.load_plugin(r"C:\Program Files\Common Files\VST3\TDR Nova.vst3")
+    nova = pb.load_plugin(NOVA)
     for k, v in dict(band_1_active=True, band_1_type="Bell", band_1_frequency_hz=8500.0, band_1_q=0.8,
                      band_1_gain_db=0.0, band_1_dyn="On", band_1_threshold_db=-16.0, band_1_ratio=3.0,
                      band_1_attack_ms=1.0, band_1_release_ms=50.0, eq_auto_gain=False).items():

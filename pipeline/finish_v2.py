@@ -8,6 +8,7 @@ Rejected by ear: effects on separated stems, soothe2, RX de-noise, tape saturati
 usage: finish_v2.py <take folder> <reference.wav> <out_dir> <name>     (tools venv; CPU only)"""
 import os, subprocess, sys
 import soundfile as sf
+from paths import MASTER
 
 take, ref, out_dir, name = sys.argv[1:5]
 here = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +26,7 @@ print(last(subprocess.run([py, os.path.join(here, "premium.py"), bus, prem, "wid
 #   MASTER_HIGH_DB=1.5 MASTER_LP_HZ=0
 defaults = dict(MASTER_LUFS="-14", MASTER_SUB_CAP="0", MASTER_BODY_DB="2.5", MASTER_HIGH_DB="-4", MASTER_LP_HZ="13000")
 env = dict(os.environ, **{k: os.environ.get(k, v) for k, v in defaults.items()})
-print(last(subprocess.run([py, r"D:\Editing\Youtube\AI\song01_paper_planes\scripts\master_ref.py", prem, ref, final],
+print(last(subprocess.run([py, MASTER, prem, ref, final],
                           check=True, capture_output=True, text=True, env=env)))
 x, sr = sf.read(final, always_2d=True)
 sf.write(final.replace(".wav", ".flac"), x, sr, subtype="PCM_24")

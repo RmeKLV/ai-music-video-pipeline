@@ -80,9 +80,9 @@ def main():
         sf.write(a.dst, y, sr, subtype="PCM_24")
         print(f"{a.dst}: mean cut {cut.mean():.1f} dB, p95 {np.percentile(cut, 95):.1f} dB, frames cut {np.mean(cut > 0.5) * 100:.0f}%")
     elif a.cmd == "repair":
-        import importlib.util
+        import importlib.util, os
         spec = importlib.util.spec_from_file_location(
-            "hfblend", r"D:\ComfyUI_windows_portable\ComfyUI\custom_nodes\comfyui-hybrid-hf-blend\__init__.py")
+            "hfblend", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "comfyui", "nodes", "hybrid_hf_blend.py"))
         hb = importlib.util.module_from_spec(spec); spec.loader.exec_module(hb)
         protect, headroom, tilt, max_cut = hb.HFArtifactRepair.PRESETS[a.mode]
         x, sr = sf.read(a.src, always_2d=True)

@@ -16,7 +16,7 @@ import numpy as np
 import soundfile as sf
 
 _spec = importlib.util.spec_from_file_location(
-    "hfblend", r"D:\ComfyUI_windows_portable\ComfyUI\custom_nodes\comfyui-hybrid-hf-blend\__init__.py")
+    "hfblend", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "comfyui", "nodes", "hybrid_hf_blend.py"))
 hfblend = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(hfblend)
 
@@ -67,7 +67,7 @@ def main():
         import jiwer
         from faster_whisper import WhisperModel
         norm = lambda t: " ".join(re.sub(r"[^\w ]+", " ", re.sub(r"\[[^\]]*\]", " ", t.lower()).replace("'", "")).split())
-        ref = norm(open(r"D:\Editing\Youtube\AI\song01_paper_planes\lyrics.txt", encoding="utf-8").read())
+        ref = norm(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "lyrics.txt"), encoding="utf-8").read())
         wm = WhisperModel("mobiuslabsgmbh/faster-whisper-large-v3-turbo", device="cpu", compute_type="int8")
     rows = []
     for p in files:

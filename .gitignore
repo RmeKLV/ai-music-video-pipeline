@@ -18,6 +18,7 @@ assets/
 !licenses/LICENSES.md
 
 !pipeline/*.py
+!pipeline/requirements.txt
 !song01_paper_planes/scripts/*.py
 !song01_paper_planes/scripts/*.sh
 

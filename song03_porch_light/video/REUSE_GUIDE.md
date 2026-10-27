@@ -15,10 +15,14 @@ Everything here is a pure-code film (three.js + canvas, Motion Reel harness): no
 | `../../pipeline/drum_soften.py`, `drum_tail_gate.py` | drum softening + gating the AI hum between hits (see AUDIO_PLAYBOOK.md) |
 
 ## Steps for a new song
-1. Copy `porch-light/` to a new folder name next to it (e.g. `paper-planes/`), keep `tools/`, `node_modules/`, `package.json`.
-2. Put the new song's beat grid + lyrics in: `uv run <motion-reel>/scripts/beats.py <film> --track song.flac --full`,
-   vocal stem to `<film>/audio/stems/vocals.wav`, lyric sheet to `docs/lyrics.txt` (one line per window), then
-   `uv run <motion-reel>/scripts/align.py <film>` and `python docs/gapfix.py` (check every moved line by ear/energy).
+0. `npm install` once (fonts are served from `node_modules/@fontsource`, no copying).
+1. + 2. `python ../../pipeline/to_video.py <master> <vocals stem> <film> --lyrics lyrics.txt --title "Name" --bpm N`
+   creates `<film>/` from `porch-light/` (code only) and fills in the song: `audio/mix.wav`, `audio/stems/vocals.wav`,
+   `beats.json` (measured grid, beat 0 = first downbeat), `film.json` (duration, title), `lipsync.json`, a draft
+   `lyrics.json` and `docs/lyrics.txt` alignment windows from the ACE/YuE lyric sheet. Check the printed bpm and
+   downbeat (`--downbeat S` if it is a beat off). Re-running keeps hand-tuned JSON unless `--force`.
+   Then replace the draft lyric timing: check the windows in `docs/lyrics.txt`, `uv run <motion-reel>/scripts/align.py <film>`
+   and `python docs/gapfix.py` (check every moved line by ear/energy).
 3. Rewrite the shots in `film.js` (`renderShot`, `BOUNDS`, `TRANS`). Snap every cut to a downbeat from `beats.json`;
    never repeat a transition type more than twice; keep smootherstep easing.
 4. Check: contact sheet (`--contact --every 2`), strips across cuts, and the flicker scan

@@ -7,9 +7,10 @@ import glob, json, os, random, re, sys
 import numpy as np
 import soundfile as sf
 from scipy.signal import resample_poly
+import paths
 
 hits_p, out, SR, DUR = sys.argv[1], sys.argv[2], int(sys.argv[3]), float(sys.argv[4])
-KIT = sys.argv[5] if len(sys.argv) > 5 else r"D:\Editing\Youtube\AI\assets\drums\big_rusty\Samples"
+KIT = sys.argv[5] if len(sys.argv) > 5 else paths.need(paths.DRUM_KIT, "Big Rusty Drums samples", "AI_DRUM_KIT")
 # instrument -> list of (mic folder, gain dB)  (close mic first, overheads after)
 MAP = {
     "kick":   [("kick_24/kick/kick", 0.0), ("kick_24/kick/oh", -9.0)],

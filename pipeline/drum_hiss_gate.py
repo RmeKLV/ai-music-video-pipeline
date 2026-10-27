@@ -41,6 +41,5 @@ for s in ("bass", "other"):
     src = sorted(glob.glob(os.path.join(take, s + ".*")))
     if src:
         shutil.copy(src[0], out)
-hf = lambda x: np.sqrt(np.mean(istft(Z * (np.ones_like(G) * (f[:, None] >= CUT))[None], sr, nperseg=N, noverlap=N - H)[1] ** 2)) if x is None else 0
 r = lambda x: 20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-12)
 print(f"drum stem: {r(d):.1f} -> {r(dg):.1f} dBFS overall; gate open (>50 %) {np.mean(gate > 0.5) * 100:.0f}% of the time; floor {FLOOR} dB above {CUT:.0f} Hz")

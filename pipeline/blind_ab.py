@@ -6,11 +6,11 @@ usage: blind_ab.py reference.wav out_dir name=fileA,fileB [name=fileA,fileB ...]
 import json, os, random, subprocess, sys, tempfile
 import numpy as np
 import soundfile as sf
+from paths import MASTER as master
 
 CLIP = 25.0
 ref, out = sys.argv[1], sys.argv[2]
 os.makedirs(out, exist_ok=True)
-master = r"D:\Editing\Youtube\AI\song01_paper_planes\scripts\master_ref.py"
 tmp = tempfile.mkdtemp(prefix="blind_")
 key, rng = {}, random.Random()
 for n, arg in enumerate(sys.argv[3:], 1):
@@ -24,7 +24,7 @@ for n, arg in enumerate(sys.argv[3:], 1):
     (xa, sr), (xb, _) = rendered
     m = min(len(xa), len(xb)); xa, xb = xa[:m], xb[:m]
     win, hop = int(CLIP * sr), sr // 2
-    e = np.array([np.mean(xa[i:i + win] ** 2) for i in range(0, m - win, hop)])
+    e = np.array([np.mean(xa[i:i + win] ** 2) for i in range(0, max(1, m - win + 1), hop)])
     s = int(np.argmax(e)) * hop  # same window for both renders
     fade = int(0.5 * sr); ramp = np.linspace(0, 1, fade)[:, None]
     clips = {}

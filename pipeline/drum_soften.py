@@ -93,12 +93,10 @@ wet = np.stack([fftconvolve(soft[:, c], ir[:, c])[:n] for c in range(2)], 1)
 wet *= db(ROOM) * np.sqrt((soft ** 2).mean()) / max(np.sqrt((wet ** 2).mean()), 1e-9)
 new_d = soft + (wet if ROOM > -59 else 0)
 # notch tonal ringing in the drum stem (song03: 164-167 Hz "robotic hum" at 1:29), env NOTCH="165,8" (Hz,dB) list
-from scipy.signal import iirpeak
+from scipy.signal import filtfilt, iirpeak
 for spec in [x for x in os.environ.get("NOTCH", "").split(";") if x]:
     f0, cut = [float(v) for v in spec.split(",")]
     b, a = iirpeak(f0, 12, fs=sr)                   # narrow band (Q 12) around f0
-    band = np.stack([np.convolve(new_d[:, c], [1], "same") for c in range(2)], 1)
-    from scipy.signal import filtfilt
     band = filtfilt(b, a, new_d, axis=0)
     new_d = new_d - band * (1 - db(-cut))
 

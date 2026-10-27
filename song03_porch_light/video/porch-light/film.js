@@ -13,6 +13,7 @@ const DOME_C = new THREE.Vector3(0, 0, 6);
 const SEAT = new THREE.Vector3(0.32, 0.57, 6.05);     // where the keeper sits (top step)
 const sm = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
 const RX = (z) => roadX(z) + 0.75;
+const TITLE = () => M.CFG.title || 'Porch Light';   // film.json "title" (pipeline/to_video.py --title)
 
 // ------------------------------------------------------------------ lyrics
 let LINES = [];
@@ -208,7 +209,7 @@ function introMoth(ctx, t) {
 // title written on as tracked caps (2-D, over the shot)
 function title(ctx, t, t0, t1, { y = H * 0.5, day = false, size = 120 } = {}) {
   const a = Math.min(sm(t0, t0 + 1.5, t), 1 - sm(t1 - 1.0, t1, t)); if (a <= 0) return;
-  const txt = 'PORCH LIGHT';
+  const txt = TITLE().toUpperCase();
   ctx.save(); ctx.font = `600 ${size}px Display`; ctx.letterSpacing = `${size * 0.32}px`; ctx.textAlign = 'center';
   const n = Math.floor(txt.length * sm(t0, t0 + 2.2, t) + 0.999);
   ctx.globalAlpha = a; ctx.fillStyle = day ? INK : CREAM; if (!day) { ctx.shadowColor = 'rgba(255,180,90,0.7)'; ctx.shadowBlur = 30; }
@@ -618,7 +619,7 @@ function thumbDraw(ctx, u, t) {
     const g = ctx.createRadialGradient(bx, by, 0, bx, by, 420); g.addColorStop(0, 'rgba(255,230,180,0.85)'); g.addColorStop(0.25, 'rgba(255,180,90,0.35)'); g.addColorStop(1, 'rgba(255,160,70,0)');
     ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.restore();
     bigText(ctx, [{ t: 'SHE NEVER' }, { t: 'TURNS IT', color: '#ffd36b', color2: '#ff9d2e' }, { t: 'OFF', color: '#ffd36b', color2: '#ff9d2e' }], 70, 280, 196);
-    serifTag(ctx, 'Porch Light', 82, 1000, 64);
+    serifTag(ctx, TITLE(), 82, 1000, 64);
   } else if (k === 1) {
     const pv = BULB.clone().project(set.camera), bx = (pv.x + 1) / 2 * W, by = (1 - pv.y) / 2 * H;
     // hand-drawn gold circle + arrow pointing at the house (the classic thumbnail pointer)
@@ -628,7 +629,7 @@ function thumbDraw(ctx, u, t) {
     ctx.beginPath(); ctx.moveTo(bx + 250, by + 150); ctx.lineTo(bx + 330, by + 165); ctx.moveTo(bx + 250, by + 150); ctx.lineTo(bx + 268, by + 228); ctx.stroke();
     ctx.restore();
     bigText(ctx, [{ t: "IT'S ALWAYS" }, { t: 'NIGHT HERE', color: '#ffd36b', color2: '#ff9d2e' }], W / 2, 190, 190, { align: 'center', tilt: 0 });
-    serifTag(ctx, 'Porch Light', W - 80, 1010, 64, '#1c2547', 'right');
+    serifTag(ctx, TITLE(), W - 80, 1010, 64, '#1c2547', 'right');
   } else {
     // make the figure of light the subject: a warm glow behind the outline
     { const c = new THREE.Vector3(1.2, 1.45, 5.35).project(set.camera), fx = (c.x + 1) / 2 * W, fy = (1 - c.y) / 2 * H;
@@ -636,7 +637,7 @@ function thumbDraw(ctx, u, t) {
       ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.restore(); }
     bigText(ctx, [{ t: 'STILL' }, { t: 'WAITING', color: '#ffd36b', color2: '#ff9d2e' }], 70, 250, 220, { tilt: -0.02 });
     serifTag(ctx, "for someone who's gone", 86, 560, 74);
-    serifTag(ctx, 'Porch Light', W - 80, 1010, 64, '#f3e7cf', 'right');
+    serifTag(ctx, TITLE(), W - 80, 1010, 64, '#f3e7cf', 'right');
   }
 }
 const U_ = (t) => M.U(t);
