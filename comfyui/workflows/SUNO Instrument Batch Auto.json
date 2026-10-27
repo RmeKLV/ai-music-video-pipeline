@@ -1,0 +1,643 @@
+{
+  "id": "c8f3b2d1-7a49-4e02-b135-9d6a1f4e2c70",
+  "revision": 0,
+  "last_node_id": 7,
+  "last_link_id": 10,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "AudioSR",
+      "pos": [
+        -2070,
+        1660
+      ],
+      "size": [
+        283.76217501647557,
+        342
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 1
+        },
+        {
+          "localized_name": "ddim_steps",
+          "name": "ddim_steps",
+          "type": "INT",
+          "widget": {
+            "name": "ddim_steps"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "guidance_scale",
+          "name": "guidance_scale",
+          "type": "FLOAT",
+          "widget": {
+            "name": "guidance_scale"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "model",
+          "name": "model",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "chunk_size",
+          "name": "chunk_size",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "chunk_size"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "overlap",
+          "name": "overlap",
+          "shape": 7,
+          "type": "FLOAT",
+          "widget": {
+            "name": "overlap"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "unload_model",
+          "name": "unload_model",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "unload_model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "show_spectrogram",
+          "name": "show_spectrogram",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "show_spectrogram"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "attention_backend",
+          "name": "attention_backend",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "attention_backend"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "dtype",
+          "name": "dtype",
+          "shape": 7,
+          "type": "COMBO",
+          "widget": {
+            "name": "dtype"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "use_torch_compile",
+          "name": "use_torch_compile",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "use_torch_compile"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            3
+          ]
+        },
+        {
+          "localized_name": "spectrogram",
+          "name": "spectrogram",
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-audiosr",
+        "ver": "1.1.1",
+        "Node name for S&R": "AudioSR"
+      },
+      "widgets_values": [
+        50,
+        3.5,
+        4226351654,
+        "randomize",
+        "audiosr_basic_fp32.safetensors",
+        15,
+        3,
+        false,
+        true,
+        "sdpa",
+        "fp32",
+        false
+      ]
+    },
+    {
+      "id": 3,
+      "type": "AutoInstrumentBlend",
+      "pos": [
+        -1720,
+        1700
+      ],
+      "size": [
+        330,
+        150
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "base_audio",
+          "name": "base_audio",
+          "type": "AUDIO",
+          "link": 2
+        },
+        {
+          "localized_name": "donor_audio",
+          "name": "donor_audio",
+          "type": "AUDIO",
+          "link": 3
+        },
+        {
+          "localized_name": "filename",
+          "name": "filename",
+          "type": "STRING",
+          "link": 6
+        },
+        {
+          "localized_name": "hf_gain_mult",
+          "name": "hf_gain_mult",
+          "type": "FLOAT",
+          "widget": {
+            "name": "hf_gain_mult"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "min_content_hz",
+          "name": "min_content_hz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "min_content_hz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "process_mode",
+          "name": "process_mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "process_mode"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            9
+          ]
+        },
+        {
+          "localized_name": "info",
+          "name": "info",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AutoInstrumentBlend"
+      },
+      "widgets_values": [
+        1,
+        2500,
+        "auto"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "SaveAudioWithName",
+      "pos": [
+        -1350,
+        1700
+      ],
+      "size": [
+        290,
+        180
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 10
+        },
+        {
+          "localized_name": "filename",
+          "name": "filename",
+          "type": "STRING",
+          "link": 5
+        },
+        {
+          "localized_name": "subfolder",
+          "name": "subfolder",
+          "type": "STRING",
+          "widget": {
+            "name": "subfolder"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "suffix",
+          "name": "suffix",
+          "type": "STRING",
+          "widget": {
+            "name": "suffix"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "format",
+          "name": "format",
+          "type": "COMBO",
+          "widget": {
+            "name": "format"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "overwrite",
+          "name": "overwrite",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "overwrite"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveAudioWithName"
+      },
+      "widgets_values": [
+        "SUNO_enhanced",
+        "_enhanced",
+        "wav",
+        false
+      ]
+    },
+    {
+      "id": 1,
+      "type": "LoadAudioBatch",
+      "pos": [
+        -2420,
+        1700
+      ],
+      "size": [
+        320,
+        218
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "directory",
+          "name": "directory",
+          "type": "STRING",
+          "widget": {
+            "name": "directory"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "index",
+          "name": "index",
+          "type": "INT",
+          "widget": {
+            "name": "index"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "order",
+          "name": "order",
+          "type": "COMBO",
+          "widget": {
+            "name": "order"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "seed",
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            1,
+            2
+          ]
+        },
+        {
+          "localized_name": "filename",
+          "name": "filename",
+          "type": "STRING",
+          "links": [
+            5,
+            6
+          ]
+        },
+        {
+          "localized_name": "file_count",
+          "name": "file_count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudioBatch"
+      },
+      "widgets_values": [
+        "C:\\path\\to\\your\\stems folder",
+        6,
+        "increment",
+        "sequential",
+        3249571394,
+        "randomize"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "HFArtifactRepair",
+      "pos": [
+        -100,
+        700
+      ],
+      "size": [
+        300,
+        190
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 9
+        },
+        {
+          "localized_name": "mode",
+          "name": "mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "detect_only",
+          "name": "detect_only",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "detect_only"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "lowpass_hz",
+          "name": "lowpass_hz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "lowpass_hz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "protect_hz",
+          "name": "protect_hz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "protect_hz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "headroom_db",
+          "name": "headroom_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "headroom_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "tilt_db_per_khz",
+          "name": "tilt_db_per_khz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "tilt_db_per_khz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_cut_db",
+          "name": "max_cut_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_cut_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "use_median",
+          "name": "use_median",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "use_median"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "margin_db",
+          "name": "margin_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "margin_db"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            10
+          ]
+        },
+        {
+          "localized_name": "report",
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hybrid-hf-blend",
+        "ver": "1.0.0",
+        "Node name for S&R": "HFArtifactRepair"
+      },
+      "widgets_values": [
+        "instrument",
+        false,
+        0.0,
+        10000.0,
+        12.0,
+        3.0,
+        25.0,
+        false,
+        14.0
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "AUDIO"
+    ],
+    [
+      2,
+      1,
+      0,
+      3,
+      0,
+      "AUDIO"
+    ],
+    [
+      3,
+      2,
+      0,
+      3,
+      1,
+      "AUDIO"
+    ],
+    [
+      5,
+      1,
+      1,
+      4,
+      1,
+      "STRING"
+    ],
+    [
+      6,
+      1,
+      1,
+      3,
+      2,
+      "STRING"
+    ],
+    [
+      9,
+      3,
+      0,
+      7,
+      0,
+      "AUDIO"
+    ],
+    [
+      10,
+      7,
+      0,
+      4,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "SUNO Instrument Batch (Auto): filename picks settings per instrument, skips bass/dark stems automatically",
+      "bounding": [
+        -2440,
+        1590,
+        1420,
+        440
+      ],
+      "color": "#a1309b",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.2444850000000007,
+      "offset": [
+        2525.4195108820204,
+        -1436.780917407602
+      ]
+    }
+  },
+  "version": 0.4
+}

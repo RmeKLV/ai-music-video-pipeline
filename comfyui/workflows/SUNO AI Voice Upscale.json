@@ -1,0 +1,861 @@
+{
+  "id": "107a3584-7413-496c-bb1d-7f28f99739ea",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 23,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "FL_ClearVoice_ModelLoader",
+      "pos": [
+        -2255.727488734532,
+        1622.9210356605022
+      ],
+      "size": [
+        287.3140625,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "COMBO",
+          "widget": {
+            "name": "model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "force_reload",
+          "name": "force_reload",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "force_reload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "CLEARVOICE_MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_fl-clearvoice",
+        "ver": "1.1.1",
+        "Node name for S&R": "FL_ClearVoice_ModelLoader"
+      },
+      "widgets_values": [
+        "MossFormer2_SE_48K",
+        false
+      ]
+    },
+    {
+      "id": 13,
+      "type": "FL_ClearVoice_ModelLoader",
+      "pos": [
+        -2252.1880868423978,
+        1944.8900991767107
+      ],
+      "size": [
+        287.3140625,
+        82
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "COMBO",
+          "widget": {
+            "name": "model"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "force_reload",
+          "name": "force_reload",
+          "shape": 7,
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "force_reload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "CLEARVOICE_MODEL",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_fl-clearvoice",
+        "ver": "1.1.1",
+        "Node name for S&R": "FL_ClearVoice_ModelLoader"
+      },
+      "widgets_values": [
+        "MossFormer2_SR_48K",
+        false
+      ]
+    },
+    {
+      "id": 1,
+      "type": "FL_ClearVoice_Process",
+      "pos": [
+        -1935.230930357707,
+        1689.2950799671098
+      ],
+      "size": [
+        222.10437973280787,
+        46
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "CLEARVOICE_MODEL",
+          "link": 1
+        },
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            8,
+            12
+          ]
+        },
+        {
+          "localized_name": "message",
+          "name": "message",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_fl-clearvoice",
+        "ver": "1.1.1",
+        "Node name for S&R": "FL_ClearVoice_Process"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 14,
+      "type": "FL_ClearVoice_Process",
+      "pos": [
+        -1931.6915284655752,
+        1788.269588265452
+      ],
+      "size": [
+        222.10437973280787,
+        46
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "model",
+          "name": "model",
+          "type": "CLEARVOICE_MODEL",
+          "link": 9
+        },
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            10,
+            13
+          ]
+        },
+        {
+          "localized_name": "message",
+          "name": "message",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_fl-clearvoice",
+        "ver": "1.1.1",
+        "Node name for S&R": "FL_ClearVoice_Process"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 4,
+      "type": "SaveAudioAdvanced",
+      "pos": [
+        -1276.3078175276844,
+        1734.1332592751335
+      ],
+      "size": [
+        270,
+        136
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 22
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "format",
+          "name": "format",
+          "type": "COMFY_DYNAMICCOMBO_V3",
+          "widget": {
+            "name": "format"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "audioUI",
+          "name": "audioUI",
+          "type": "AUDIO_UI",
+          "widget": {
+            "name": "audioUI"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.25.0",
+        "Node name for S&R": "SaveAudioAdvanced"
+      },
+      "widgets_values": [
+        "audio/SUNO_vocals",
+        "flac"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "LoadAudio",
+      "pos": [
+        -2255.31068344486,
+        1750.0923993868093
+      ],
+      "size": [
+        282.798828125,
+        136
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "COMBO",
+          "widget": {
+            "name": "audio"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "audioUI",
+          "name": "audioUI",
+          "type": "AUDIO_UI",
+          "widget": {
+            "name": "audioUI"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "choose file to upload",
+          "name": "upload",
+          "type": "AUDIOUPLOAD",
+          "widget": {
+            "name": "upload"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "AUDIO",
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            2,
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.25.0",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "1_1 Backing Vocals_(No Reverb)RX (1).wav",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 12,
+      "type": "HybridHFBlend",
+      "pos": [
+        -1660.4085459248447,
+        1843.8164040361814
+      ],
+      "size": [
+        331.99375,
+        198
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 4,
+      "inputs": [
+        {
+          "localized_name": "base_audio",
+          "name": "base_audio",
+          "type": "AUDIO",
+          "link": 8
+        },
+        {
+          "localized_name": "donor_audio",
+          "name": "donor_audio",
+          "type": "AUDIO",
+          "link": 10
+        },
+        {
+          "localized_name": "crossover_hz",
+          "name": "crossover_hz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "crossover_hz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "gate_low_db",
+          "name": "gate_low_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "gate_low_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "gate_high_db",
+          "name": "gate_high_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "gate_high_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "hf_gain",
+          "name": "hf_gain",
+          "type": "FLOAT",
+          "widget": {
+            "name": "hf_gain"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "release_ms",
+          "name": "release_ms",
+          "type": "FLOAT",
+          "widget": {
+            "name": "release_ms"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "hf_ceiling",
+          "name": "hf_ceiling",
+          "type": "FLOAT",
+          "widget": {
+            "name": "hf_ceiling"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HybridHFBlend"
+      },
+      "widgets_values": [
+        10500,
+        -55,
+        -35,
+        1,
+        200,
+        0.6
+      ]
+    },
+    {
+      "id": 16,
+      "type": "HybridHFBlend",
+      "pos": [
+        -1680.6231981415544,
+        1606.4751435675378
+      ],
+      "size": [
+        376.9390625,
+        198
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "base_audio",
+          "name": "base_audio",
+          "type": "AUDIO",
+          "link": 12
+        },
+        {
+          "localized_name": "donor_audio",
+          "name": "donor_audio",
+          "type": "AUDIO",
+          "link": 13
+        },
+        {
+          "localized_name": "crossover_hz",
+          "name": "crossover_hz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "crossover_hz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "gate_low_db",
+          "name": "gate_low_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "gate_low_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "gate_high_db",
+          "name": "gate_high_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "gate_high_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "hf_gain",
+          "name": "hf_gain",
+          "type": "FLOAT",
+          "widget": {
+            "name": "hf_gain"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "release_ms",
+          "name": "release_ms",
+          "type": "FLOAT",
+          "widget": {
+            "name": "release_ms"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "hf_ceiling",
+          "name": "hf_ceiling",
+          "type": "FLOAT",
+          "widget": {
+            "name": "hf_ceiling"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "title": "Backing Vocals Hybrid HF Blend (base + gated HF)",
+      "properties": {
+        "Node name for S&R": "HybridHFBlend"
+      },
+      "widgets_values": [
+        10500,
+        -64,
+        -44,
+        0.75,
+        200,
+        0.6
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 17,
+      "type": "HFArtifactRepair",
+      "pos": [
+        -1520,
+        1600
+      ],
+      "size": [
+        300,
+        190
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 21
+        },
+        {
+          "localized_name": "mode",
+          "name": "mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "mode"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "detect_only",
+          "name": "detect_only",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "detect_only"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "lowpass_hz",
+          "name": "lowpass_hz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "lowpass_hz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "protect_hz",
+          "name": "protect_hz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "protect_hz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "headroom_db",
+          "name": "headroom_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "headroom_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "tilt_db_per_khz",
+          "name": "tilt_db_per_khz",
+          "type": "FLOAT",
+          "widget": {
+            "name": "tilt_db_per_khz"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "max_cut_db",
+          "name": "max_cut_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "max_cut_db"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "use_median",
+          "name": "use_median",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "use_median"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "margin_db",
+          "name": "margin_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "margin_db"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            22,
+            23
+          ]
+        },
+        {
+          "localized_name": "report",
+          "name": "report",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hybrid-hf-blend",
+        "ver": "1.0.0",
+        "Node name for S&R": "HFArtifactRepair"
+      },
+      "widgets_values": [
+        "vocal",
+        false,
+        0.0,
+        10000.0,
+        12.0,
+        3.0,
+        25.0,
+        false,
+        14.0
+      ]
+    },
+    {
+      "id": 18,
+      "type": "SaveAudioWAV",
+      "pos": [
+        -1276,
+        1900
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "localized_name": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 23
+        },
+        {
+          "localized_name": "filename_prefix",
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "localized_name": "bit_depth",
+          "name": "bit_depth",
+          "type": "COMBO",
+          "widget": {
+            "name": "bit_depth"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfyui-batch-audio",
+        "ver": "1.0.0",
+        "Node name for S&R": "SaveAudioWAV"
+      },
+      "widgets_values": [
+        "audio/SUNO_vocals",
+        "24"
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "CLEARVOICE_MODEL"
+    ],
+    [
+      2,
+      3,
+      0,
+      1,
+      1,
+      "AUDIO"
+    ],
+    [
+      8,
+      1,
+      0,
+      12,
+      0,
+      "AUDIO"
+    ],
+    [
+      9,
+      13,
+      0,
+      14,
+      0,
+      "CLEARVOICE_MODEL"
+    ],
+    [
+      10,
+      14,
+      0,
+      12,
+      1,
+      "AUDIO"
+    ],
+    [
+      11,
+      3,
+      0,
+      14,
+      1,
+      "AUDIO"
+    ],
+    [
+      12,
+      1,
+      0,
+      16,
+      0,
+      "AUDIO"
+    ],
+    [
+      13,
+      14,
+      0,
+      16,
+      1,
+      "AUDIO"
+    ],
+    [
+      21,
+      16,
+      0,
+      17,
+      0,
+      "AUDIO"
+    ],
+    [
+      22,
+      17,
+      0,
+      4,
+      0,
+      "AUDIO"
+    ],
+    [
+      23,
+      17,
+      0,
+      18,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Vocals",
+      "bounding": [
+        -2277.8988710652184,
+        1517.3541597496487,
+        1309.0373438571435,
+        527.8467770247764
+      ],
+      "color": "#8A8",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9672993097436889,
+      "offset": [
+        2669.454370272648,
+        -1321.7575279586608
+      ]
+    }
+  },
+  "version": 0.4
+}

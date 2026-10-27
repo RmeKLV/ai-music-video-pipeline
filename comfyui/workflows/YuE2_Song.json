@@ -1,0 +1,1717 @@
+{
+  "id": "yue2-yue2_song",
+  "revision": 0,
+  "last_node_id": 20,
+  "last_link_id": 51,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        0,
+        60
+      ],
+      "size": [
+        360,
+        100
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "ckpt_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "ckpt_name"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            17
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1,
+            9
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "yue2_3b_bf16.safetensors"
+      ],
+      "title": "YuE2 3B bf16 (LM + acoustic model + VAE)"
+    },
+    {
+      "id": 2,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        0,
+        200
+      ],
+      "size": [
+        420,
+        160
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2,
+            10,
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "English, bright expressive female vocal, J-pop anime opening theme, 150 BPM, soaring violin lead, crunchy electric guitars, driving drums, melodic bass, synth strings, energetic and uplifting, big catchy chorus, polished modern production"
+      ],
+      "title": "STYLE: language, genre, vocal, BPM, instruments, mood"
+    },
+    {
+      "id": 3,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        0,
+        400
+      ],
+      "size": [
+        420,
+        520
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            3,
+            11,
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "[Verse]\nPaper wings above the station\nChasing sparks across the sky\nEvery star a destination\nEvery step a reason why\n\n[Chorus]\nFly away, fly away\nThrough the fire and the rain\nHold my hand, we're breaking free\nNothing's gonna hold us back again\n\n[Verse]\nNeon rivers in the evening\nEchoes of a promise made\nKeep the melody believing\nEven when the colors fade\n\n[Chorus]\nFly away, fly away\nThrough the fire and the rain\nHold my hand, we're breaking free\nNothing's gonna hold us back again\n\n[Outro]\nFly away, fly away"
+      ],
+      "title": "LYRICS: [Verse] [Chorus] [Bridge] [Outro] - sung words only"
+    },
+    {
+      "id": 4,
+      "type": "SeedNode",
+      "pos": [
+        0,
+        960
+      ],
+      "size": [
+        300,
+        90
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            4,
+            13,
+            21,
+            27
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SeedNode"
+      },
+      "widgets_values": [
+        831001,
+        "randomize"
+      ],
+      "title": "Seed (shared by all stages)"
+    },
+    {
+      "id": 5,
+      "type": "PrimitiveBoolean",
+      "pos": [
+        480,
+        60
+      ],
+      "size": [
+        320,
+        60
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveBoolean"
+      },
+      "widgets_values": [
+        true
+      ],
+      "title": "ABC planning (true = better song structure)"
+    },
+    {
+      "id": 6,
+      "type": "YuE2GenerateABC",
+      "pos": [
+        480,
+        160
+      ],
+      "size": [
+        380,
+        340
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1
+        },
+        {
+          "name": "style",
+          "type": "STRING",
+          "widget": {
+            "name": "style"
+          },
+          "link": 2
+        },
+        {
+          "name": "lyrics",
+          "type": "STRING",
+          "widget": {
+            "name": "lyrics"
+          },
+          "link": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "abc",
+          "type": "STRING",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "YuE2GenerateABC"
+      },
+      "widgets_values": [
+        "",
+        "",
+        0,
+        "fixed",
+        "full",
+        8192,
+        0.7,
+        0.9,
+        30,
+        1.005,
+        100
+      ],
+      "title": "YuE2 Generate ABC (stage 0: melody + chords plan)"
+    },
+    {
+      "id": 7,
+      "type": "PrimitiveString",
+      "pos": [
+        480,
+        540
+      ],
+      "size": [
+        260,
+        60
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value",
+          "type": "STRING",
+          "widget": {
+            "name": "value"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveString"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "title": "(no plan)"
+    },
+    {
+      "id": 8,
+      "type": "ComfySwitchNode",
+      "pos": [
+        880,
+        60
+      ],
+      "size": [
+        220,
+        80
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 5
+        },
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 6
+        },
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "switch"
+          },
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ComfySwitchNode"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 9,
+      "type": "PreviewAny",
+      "pos": [
+        1140,
+        620
+      ],
+      "size": [
+        420,
+        380
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "title": "ABC score used (copy/edit me)"
+    },
+    {
+      "id": 10,
+      "type": "YuE2GenerateMusic",
+      "pos": [
+        1600,
+        60
+      ],
+      "size": [
+        380,
+        420
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 9
+        },
+        {
+          "name": "style",
+          "type": "STRING",
+          "widget": {
+            "name": "style"
+          },
+          "link": 10
+        },
+        {
+          "name": "lyrics",
+          "type": "STRING",
+          "widget": {
+            "name": "lyrics"
+          },
+          "link": 11
+        },
+        {
+          "name": "abc",
+          "type": "STRING",
+          "widget": {
+            "name": "abc"
+          },
+          "link": 12
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            15,
+            18
+          ]
+        },
+        {
+          "name": "seconds",
+          "type": "FLOAT",
+          "links": [
+            14,
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "YuE2GenerateMusic"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        0,
+        "fixed",
+        "full",
+        360,
+        1.0,
+        0.95,
+        100,
+        1.2
+      ],
+      "title": "YuE2 Generate Music (stage 1: tokens)"
+    },
+    {
+      "id": 11,
+      "type": "PreviewAny",
+      "pos": [
+        1600,
+        520
+      ],
+      "size": [
+        260,
+        90
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewAny"
+      },
+      "title": "Song length (s)"
+    },
+    {
+      "id": 12,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        2020,
+        420
+      ],
+      "size": [
+        240,
+        30
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      }
+    },
+    {
+      "id": 13,
+      "type": "EmptyYuE2LatentAudio",
+      "pos": [
+        2020,
+        520
+      ],
+      "size": [
+        260,
+        90
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "seconds"
+          },
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyYuE2LatentAudio"
+      },
+      "widgets_values": [
+        120,
+        1
+      ]
+    },
+    {
+      "id": 14,
+      "type": "KSampler",
+      "pos": [
+        2300,
+        60
+      ],
+      "size": [
+        320,
+        270
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 17
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 18
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 19
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 20
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        32,
+        1.0,
+        "dpmpp_2m",
+        "sgm_uniform",
+        1.0
+      ],
+      "title": "KSampler (stage 2: acoustic)"
+    },
+    {
+      "id": 15,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        2660,
+        60
+      ],
+      "size": [
+        240,
+        50
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            24,
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecodeAudio"
+      }
+    },
+    {
+      "id": 16,
+      "type": "YuE2DemucsSeparate",
+      "pos": [
+        2660,
+        160
+      ],
+      "size": [
+        340,
+        240
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 24
+        },
+        {
+          "name": "model",
+          "type": "COMBO",
+          "widget": {
+            "name": "model"
+          },
+          "link": null
+        },
+        {
+          "name": "shifts",
+          "type": "INT",
+          "widget": {
+            "name": "shifts"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "vocals",
+          "type": "AUDIO",
+          "links": [
+            25,
+            29
+          ]
+        },
+        {
+          "name": "instrumental",
+          "type": "AUDIO",
+          "links": [
+            45
+          ]
+        },
+        {
+          "name": "drums",
+          "type": "AUDIO",
+          "links": [
+            30
+          ]
+        },
+        {
+          "name": "bass",
+          "type": "AUDIO",
+          "links": [
+            31
+          ]
+        },
+        {
+          "name": "other",
+          "type": "AUDIO",
+          "links": [
+            32
+          ]
+        },
+        {
+          "name": "guitar",
+          "type": "AUDIO",
+          "links": [
+            33
+          ]
+        },
+        {
+          "name": "piano",
+          "type": "AUDIO",
+          "links": [
+            34
+          ]
+        },
+        {
+          "name": "residual",
+          "type": "AUDIO",
+          "links": [
+            41
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "YuE2DemucsSeparate"
+      },
+      "widgets_values": [
+        "htdemucs_ft",
+        1
+      ],
+      "title": "Stem Separate (Demucs) - _6s adds guitar+piano"
+    },
+    {
+      "id": 17,
+      "type": "YuE2LyricScore",
+      "pos": [
+        3040,
+        60
+      ],
+      "size": [
+        420,
+        300
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vocals",
+          "type": "AUDIO",
+          "link": 25
+        },
+        {
+          "name": "lyrics",
+          "type": "STRING",
+          "link": 26
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "name": "whisper_model",
+          "type": "COMBO",
+          "widget": {
+            "name": "whisper_model"
+          },
+          "link": null
+        },
+        {
+          "name": "language",
+          "type": "COMBO",
+          "widget": {
+            "name": "language"
+          },
+          "link": null
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": 27
+        },
+        {
+          "name": "style",
+          "type": "STRING",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lyric_accuracy",
+          "type": "FLOAT",
+          "links": []
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "links": [
+            42
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "YuE2LyricScore"
+      },
+      "widgets_values": [
+        "audio/YuE2_song",
+        "mobiuslabsgmbh/faster-whisper-large-v3-turbo",
+        "en"
+      ],
+      "title": "Lyric Accuracy Score (Whisper) - logs to output/audio/yue2_scores.csv"
+    },
+    {
+      "id": 18,
+      "type": "YuE2EnhanceStems",
+      "pos": [
+        3040,
+        420
+      ],
+      "size": [
+        420,
+        220
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mode",
+          "type": "COMBO",
+          "widget": {
+            "name": "mode"
+          },
+          "link": null
+        },
+        {
+          "name": "vocals",
+          "type": "AUDIO",
+          "link": 29
+        },
+        {
+          "name": "drums",
+          "type": "AUDIO",
+          "link": 30
+        },
+        {
+          "name": "bass",
+          "type": "AUDIO",
+          "link": 31
+        },
+        {
+          "name": "other",
+          "type": "AUDIO",
+          "link": 32
+        },
+        {
+          "name": "guitar",
+          "type": "AUDIO",
+          "link": 33
+        },
+        {
+          "name": "piano",
+          "type": "AUDIO",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "vocals",
+          "type": "AUDIO",
+          "links": [
+            35,
+            46
+          ]
+        },
+        {
+          "name": "drums",
+          "type": "AUDIO",
+          "links": [
+            36,
+            47
+          ]
+        },
+        {
+          "name": "bass",
+          "type": "AUDIO",
+          "links": [
+            37,
+            48
+          ]
+        },
+        {
+          "name": "other",
+          "type": "AUDIO",
+          "links": [
+            38,
+            49
+          ]
+        },
+        {
+          "name": "guitar",
+          "type": "AUDIO",
+          "links": [
+            39,
+            50
+          ]
+        },
+        {
+          "name": "piano",
+          "type": "AUDIO",
+          "links": [
+            40,
+            51
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "YuE2EnhanceStems"
+      },
+      "widgets_values": [
+        "off"
+      ],
+      "title": "OPTIONAL: Enhance Stems (off = free passthrough)"
+    },
+    {
+      "id": 19,
+      "type": "YuE2StemRemix",
+      "pos": [
+        3500,
+        420
+      ],
+      "size": [
+        420,
+        380
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "vocals",
+          "type": "AUDIO",
+          "link": 35
+        },
+        {
+          "name": "drums",
+          "type": "AUDIO",
+          "link": 36
+        },
+        {
+          "name": "bass",
+          "type": "AUDIO",
+          "link": 37
+        },
+        {
+          "name": "other",
+          "type": "AUDIO",
+          "link": 38
+        },
+        {
+          "name": "vocals_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "vocals_db"
+          },
+          "link": null
+        },
+        {
+          "name": "drums_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "drums_db"
+          },
+          "link": null
+        },
+        {
+          "name": "bass_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "bass_db"
+          },
+          "link": null
+        },
+        {
+          "name": "other_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "other_db"
+          },
+          "link": null
+        },
+        {
+          "name": "guitar_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "guitar_db"
+          },
+          "link": null
+        },
+        {
+          "name": "piano_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "piano_db"
+          },
+          "link": null
+        },
+        {
+          "name": "loudness",
+          "type": "COMBO",
+          "widget": {
+            "name": "loudness"
+          },
+          "link": null
+        },
+        {
+          "name": "true_peak_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "true_peak_db"
+          },
+          "link": null
+        },
+        {
+          "name": "end_fade_s",
+          "type": "FLOAT",
+          "widget": {
+            "name": "end_fade_s"
+          },
+          "link": null
+        },
+        {
+          "name": "guitar",
+          "type": "AUDIO",
+          "link": 39
+        },
+        {
+          "name": "piano",
+          "type": "AUDIO",
+          "link": 40
+        },
+        {
+          "name": "residual",
+          "type": "AUDIO",
+          "link": 41
+        }
+      ],
+      "outputs": [
+        {
+          "name": "master",
+          "type": "AUDIO",
+          "links": [
+            43
+          ]
+        },
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "YuE2StemRemix"
+      },
+      "widgets_values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        "-14 LUFS (Spotify/YouTube)",
+        -1.0,
+        2.0
+      ],
+      "title": "Stem Remix + Master (all 0 dB = original mix, loudness-normalised)"
+    },
+    {
+      "id": 20,
+      "type": "YuE2SaveStems",
+      "pos": [
+        3980,
+        60
+      ],
+      "size": [
+        460,
+        440
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": 42
+        },
+        {
+          "name": "skip_below_db",
+          "type": "FLOAT",
+          "widget": {
+            "name": "skip_below_db"
+          },
+          "link": null
+        },
+        {
+          "name": "master",
+          "type": "AUDIO",
+          "link": 43
+        },
+        {
+          "name": "mix",
+          "type": "AUDIO",
+          "link": 44
+        },
+        {
+          "name": "vocals",
+          "type": "AUDIO",
+          "link": 46
+        },
+        {
+          "name": "instrumental",
+          "type": "AUDIO",
+          "link": 45
+        },
+        {
+          "name": "drums",
+          "type": "AUDIO",
+          "link": 47
+        },
+        {
+          "name": "bass",
+          "type": "AUDIO",
+          "link": 48
+        },
+        {
+          "name": "other",
+          "type": "AUDIO",
+          "link": 49
+        },
+        {
+          "name": "guitar",
+          "type": "AUDIO",
+          "link": 50
+        },
+        {
+          "name": "piano",
+          "type": "AUDIO",
+          "link": 51
+        }
+      ],
+      "outputs": [
+        {
+          "name": "report",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "YuE2SaveStems"
+      },
+      "widgets_values": [
+        "audio/YuE2_song",
+        -50.0
+      ],
+      "title": "Save Stems + Quality Report"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      2,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      3,
+      3,
+      0,
+      6,
+      2,
+      "STRING"
+    ],
+    [
+      4,
+      4,
+      0,
+      6,
+      3,
+      "INT"
+    ],
+    [
+      5,
+      7,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      6,
+      6,
+      0,
+      8,
+      1,
+      "STRING"
+    ],
+    [
+      7,
+      5,
+      0,
+      8,
+      2,
+      "BOOLEAN"
+    ],
+    [
+      8,
+      8,
+      0,
+      9,
+      0,
+      "*"
+    ],
+    [
+      9,
+      1,
+      1,
+      10,
+      0,
+      "CLIP"
+    ],
+    [
+      10,
+      2,
+      0,
+      10,
+      1,
+      "STRING"
+    ],
+    [
+      11,
+      3,
+      0,
+      10,
+      2,
+      "STRING"
+    ],
+    [
+      12,
+      9,
+      0,
+      10,
+      3,
+      "STRING"
+    ],
+    [
+      13,
+      4,
+      0,
+      10,
+      4,
+      "INT"
+    ],
+    [
+      14,
+      10,
+      1,
+      11,
+      0,
+      "FLOAT"
+    ],
+    [
+      15,
+      10,
+      0,
+      12,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      10,
+      1,
+      13,
+      0,
+      "FLOAT"
+    ],
+    [
+      17,
+      1,
+      0,
+      14,
+      0,
+      "MODEL"
+    ],
+    [
+      18,
+      10,
+      0,
+      14,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      19,
+      12,
+      0,
+      14,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      13,
+      0,
+      14,
+      3,
+      "LATENT"
+    ],
+    [
+      21,
+      4,
+      0,
+      14,
+      4,
+      "INT"
+    ],
+    [
+      22,
+      14,
+      0,
+      15,
+      0,
+      "LATENT"
+    ],
+    [
+      23,
+      1,
+      2,
+      15,
+      1,
+      "VAE"
+    ],
+    [
+      24,
+      15,
+      0,
+      16,
+      0,
+      "AUDIO"
+    ],
+    [
+      25,
+      16,
+      0,
+      17,
+      0,
+      "AUDIO"
+    ],
+    [
+      26,
+      3,
+      0,
+      17,
+      1,
+      "STRING"
+    ],
+    [
+      27,
+      4,
+      0,
+      17,
+      5,
+      "INT"
+    ],
+    [
+      28,
+      2,
+      0,
+      17,
+      6,
+      "STRING"
+    ],
+    [
+      29,
+      16,
+      0,
+      18,
+      1,
+      "AUDIO"
+    ],
+    [
+      30,
+      16,
+      2,
+      18,
+      2,
+      "AUDIO"
+    ],
+    [
+      31,
+      16,
+      3,
+      18,
+      3,
+      "AUDIO"
+    ],
+    [
+      32,
+      16,
+      4,
+      18,
+      4,
+      "AUDIO"
+    ],
+    [
+      33,
+      16,
+      5,
+      18,
+      5,
+      "AUDIO"
+    ],
+    [
+      34,
+      16,
+      6,
+      18,
+      6,
+      "AUDIO"
+    ],
+    [
+      35,
+      18,
+      0,
+      19,
+      0,
+      "AUDIO"
+    ],
+    [
+      36,
+      18,
+      1,
+      19,
+      1,
+      "AUDIO"
+    ],
+    [
+      37,
+      18,
+      2,
+      19,
+      2,
+      "AUDIO"
+    ],
+    [
+      38,
+      18,
+      3,
+      19,
+      3,
+      "AUDIO"
+    ],
+    [
+      39,
+      18,
+      4,
+      19,
+      13,
+      "AUDIO"
+    ],
+    [
+      40,
+      18,
+      5,
+      19,
+      14,
+      "AUDIO"
+    ],
+    [
+      41,
+      16,
+      7,
+      19,
+      15,
+      "AUDIO"
+    ],
+    [
+      42,
+      17,
+      2,
+      20,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      19,
+      0,
+      20,
+      2,
+      "AUDIO"
+    ],
+    [
+      44,
+      15,
+      0,
+      20,
+      3,
+      "AUDIO"
+    ],
+    [
+      45,
+      16,
+      1,
+      20,
+      5,
+      "AUDIO"
+    ],
+    [
+      46,
+      18,
+      0,
+      20,
+      4,
+      "AUDIO"
+    ],
+    [
+      47,
+      18,
+      1,
+      20,
+      6,
+      "AUDIO"
+    ],
+    [
+      48,
+      18,
+      2,
+      20,
+      7,
+      "AUDIO"
+    ],
+    [
+      49,
+      18,
+      3,
+      20,
+      8,
+      "AUDIO"
+    ],
+    [
+      50,
+      18,
+      4,
+      20,
+      9,
+      "AUDIO"
+    ],
+    [
+      51,
+      18,
+      5,
+      20,
+      10,
+      "AUDIO"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.75,
+      "offset": [
+        0,
+        0
+      ]
+    }
+  },
+  "version": 0.4
+}

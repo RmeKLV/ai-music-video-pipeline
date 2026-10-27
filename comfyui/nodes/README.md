@@ -43,11 +43,18 @@ integer conversion so clipping can't sneak through.
 
 ## Install
 
+These nodes live in the `comfyui/nodes` folder of
+[ai-music-video-pipeline](https://github.com/RmeKLV/ai-music-video-pipeline). Clone it, then link the folder
+into ComfyUI (a link keeps it updated when you `git pull`):
+
 ```
-cd ComfyUI/custom_nodes
-git clone https://github.com/RmeKLV/comfyui-audio-nodes
-pip install -r comfyui-audio-nodes/requirements.txt
+git clone https://github.com/RmeKLV/ai-music-video-pipeline
+mklink /J ComfyUI\custom_nodes\comfyui-audio-nodes ai-music-video-pipeline\comfyui
+odes
+pip install -r ai-music-video-pipeline/comfyui/nodes/requirements.txt
 ```
+
+(`mklink /J` is for Windows cmd; on Linux/macOS use `ln -s`, or just copy the folder.)
 
 Restart ComfyUI. Nodes appear under the **audio** category.
 
