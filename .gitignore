@@ -30,3 +30,6 @@ assets/
 !song03_porch_light/video/porch-light/lib/*.js
 !song03_porch_light/video/porch-light/sets/*.js
 !song03_porch_light/video/porch-light/docs/gapfix.py
+
+# ComfyUI custom nodes and music workflows (merged from comfyui-audio-nodes / comfyui-workflows)
+!comfyui/**
